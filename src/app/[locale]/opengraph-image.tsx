@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { getResumeData } from "@/lib/redis";
 
-export const runtime = "edge";
+export const runtime = "nodejs";
 
 export const alt = "Portfolio";
 export const size = {
