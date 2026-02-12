@@ -1,5 +1,8 @@
+"use client";
+
 import { Dock, DockIcon } from "@/components/magicui/dock";
 import { ModeToggle } from "@/components/mode-toggle";
+import { LanguageSwitcher } from "@/components/language-switcher";
 import { Separator } from "@/components/ui/separator";
 import {
   Tooltip,
@@ -7,33 +10,43 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { DATA } from "@/data/resume";
+import { /* NAVBAR_ICONS, */ SOCIAL_ICONS } from "@/data/resume";
+import { useTranslations } from "next-intl";
+// import { Link } from "@/i18n/navigation";
 
-export default function Navbar() {
+type NavbarProps = {
+  navbar: { href: string; label: string }[];
+  contact: {
+    social: Record<string, { name: string; url: string; navbar: boolean }>;
+  };
+};
+
+export default function Navbar({ navbar: _navbar, contact }: NavbarProps) {
+  const t = useTranslations("nav");
+
   return (
     <div className="pointer-events-none fixed inset-x-0 bottom-4 z-30">
       <Dock className="z-50 pointer-events-auto relative h-14 p-2 w-fit mx-auto flex gap-2 border bg-card/90 backdrop-blur-3xl shadow-[0_0_10px_3px] shadow-primary/5">
-        {DATA.navbar.map((item) => {
-          const isExternal = item.href.startsWith("http");
+        {/* TODO: Uncomment when more sections/pages are added
+        {navbar.map((item) => {
+          const IconComponent = NAVBAR_ICONS[item.label];
           return (
             <Tooltip key={item.href}>
               <TooltipTrigger asChild>
-                <a
-                  href={item.href}
-                  target={isExternal ? "_blank" : undefined}
-                  rel={isExternal ? "noopener noreferrer" : undefined}
-                >
+                <Link href={item.href}>
                   <DockIcon className="rounded-3xl cursor-pointer size-full bg-background p-0 text-muted-foreground hover:text-foreground hover:bg-muted backdrop-blur-3xl border border-border transition-colors">
-                    <item.icon className="size-full rounded-sm overflow-hidden object-contain" />
+                    {IconComponent && (
+                      <IconComponent className="size-full rounded-sm overflow-hidden object-contain" />
+                    )}
                   </DockIcon>
-                </a>
+                </Link>
               </TooltipTrigger>
               <TooltipContent
                 side="top"
                 sideOffset={8}
                 className="rounded-xl bg-primary text-primary-foreground px-4 py-2 text-sm shadow-[0_10px_40px_-10px_rgba(0,0,0,0.3)] dark:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)]"
               >
-                <p>{item.label}</p>
+                <p>{t("home")}</p>
                 <TooltipArrow className="fill-primary" />
               </TooltipContent>
             </Tooltip>
@@ -43,11 +56,12 @@ export default function Navbar() {
           orientation="vertical"
           className="h-2/3 m-auto w-px bg-border"
         />
-        {Object.entries(DATA.contact.social)
+        */}
+        {Object.entries(contact.social)
           .filter(([_, social]) => social.navbar)
           .map(([name, social], index) => {
             const isExternal = social.url.startsWith("http");
-            const IconComponent = social.icon;
+            const IconComponent = SOCIAL_ICONS[name];
             return (
               <Tooltip key={`social-${name}-${index}`}>
                 <TooltipTrigger asChild>
@@ -57,7 +71,9 @@ export default function Navbar() {
                     rel={isExternal ? "noopener noreferrer" : undefined}
                   >
                     <DockIcon className="rounded-3xl cursor-pointer size-full bg-background p-0 text-muted-foreground hover:text-foreground hover:bg-muted backdrop-blur-3xl border border-border transition-colors">
-                      <IconComponent className="size-full rounded-sm overflow-hidden object-contain" />
+                      {IconComponent && (
+                        <IconComponent className="size-full rounded-sm overflow-hidden object-contain" />
+                      )}
                     </DockIcon>
                   </a>
                 </TooltipTrigger>
@@ -76,21 +92,36 @@ export default function Navbar() {
           orientation="vertical"
           className="h-2/3 m-auto w-px bg-border"
         />
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <DockIcon className="rounded-3xl cursor-pointer size-full bg-background p-0 text-muted-foreground hover:text-foreground hover:bg-muted backdrop-blur-3xl border border-border transition-colors">
+        <DockIcon className="rounded-3xl cursor-pointer size-full bg-background p-0 text-muted-foreground hover:text-foreground hover:bg-muted backdrop-blur-3xl border border-border transition-colors">
+          <Tooltip>
+            <TooltipTrigger asChild>
               <ModeToggle className="size-full cursor-pointer" />
-            </DockIcon>
-          </TooltipTrigger>
-          <TooltipContent
-            side="top"
-            sideOffset={8}
-            className="rounded-xl bg-primary text-primary-foreground px-4 py-2 text-sm shadow-[0_10px_40px_-10px_rgba(0,0,0,0.3)] dark:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)]"
-          >
-            <p>Theme</p>
-            <TooltipArrow className="fill-primary" />
-          </TooltipContent>
-        </Tooltip>
+            </TooltipTrigger>
+            <TooltipContent
+              side="top"
+              sideOffset={8}
+              className="rounded-xl bg-primary text-primary-foreground px-4 py-2 text-sm shadow-[0_10px_40px_-10px_rgba(0,0,0,0.3)] dark:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)]"
+            >
+              <p>{t("theme")}</p>
+              <TooltipArrow className="fill-primary" />
+            </TooltipContent>
+          </Tooltip>
+        </DockIcon>
+        <DockIcon className="rounded-3xl cursor-pointer size-full bg-background p-0 text-muted-foreground hover:text-foreground hover:bg-muted backdrop-blur-3xl border border-border transition-colors">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <LanguageSwitcher className="size-full cursor-pointer" />
+            </TooltipTrigger>
+            <TooltipContent
+              side="top"
+              sideOffset={8}
+              className="rounded-xl bg-primary text-primary-foreground px-4 py-2 text-sm shadow-[0_10px_40px_-10px_rgba(0,0,0,0.3)] dark:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)]"
+            >
+              <p>{t("language")}</p>
+              <TooltipArrow className="fill-primary" />
+            </TooltipContent>
+          </Tooltip>
+        </DockIcon>
       </Dock>
     </div>
   );

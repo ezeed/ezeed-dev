@@ -1,0 +1,22 @@
+{
+  "hero": {
+    "greeting": "Hi, I'm {name}",
+    "resume": "Download Resume"
+  },
+  "about": {
+    "title": "About"
+  },
+  "skills": {
+    "title": "Skills"
+  },
+  "contact": {
+    "title": "Contact",
+    "heading": "Get in Touch",
+    "description": "Want to chat? Just <emailLink>send me an email</emailLink> and I'll respond you asap."
+  },
+  "nav": {
+    "home": "Home",
+    "theme": "Theme",
+    "language": "Language"
+  }
+}

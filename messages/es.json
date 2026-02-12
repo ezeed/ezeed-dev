@@ -1,0 +1,22 @@
+{
+  "hero": {
+    "greeting": "Hola, soy {name}",
+    "resume": "Descargar CV"
+  },
+  "about": {
+    "title": "Sobre mi"
+  },
+  "skills": {
+    "title": "Habilidades"
+  },
+  "contact": {
+    "title": "Contacto",
+    "heading": "Ponete en contacto",
+    "description": "Queres hablar? <emailLink>Mandame un email</emailLink> y te respondo pronto."
+  },
+  "nav": {
+    "home": "Inicio",
+    "theme": "Tema",
+    "language": "Idioma"
+  }
+}
