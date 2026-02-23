@@ -39,7 +39,7 @@ export default async function Page({
                 text={t("hero.greeting", { name: DATA.name.split(" ")[0] })}
               />
               <BlurFadeText
-                className="text-muted-foreground max-w-[600px] md:text-lg lg:text-xl"
+                className="text-muted-foreground max-w-150 md:text-lg lg:text-xl"
                 delay={BLUR_FADE_DELAY}
                 text={DATA.description?.[locale] ?? DATA.description?.en ?? ""}
               />
@@ -88,10 +88,17 @@ export default async function Page({
           </BlurFade>
           <div className="flex flex-wrap gap-2">
             {DATA.skills.map((skill, id) => (
-              <BlurFade key={skill.name} delay={BLUR_FADE_DELAY * 6 + id * 0.05}>
+              <BlurFade
+                key={skill.name}
+                delay={BLUR_FADE_DELAY * 6 + id * 0.05}
+              >
                 <div className="border bg-background border-border ring-2 ring-border/20 rounded-xl h-8 w-fit px-4 flex items-center gap-2">
-                  {skill.icon && <skill.icon className="size-4 rounded overflow-hidden object-contain" />}
-                  <span className="text-foreground text-sm font-medium">{skill.name}</span>
+                  {skill.icon && (
+                    <skill.icon className="size-4 rounded overflow-hidden object-contain" />
+                  )}
+                  <span className="text-foreground text-sm font-medium">
+                    {skill.name}
+                  </span>
                 </div>
               </BlurFade>
             ))}
@@ -100,7 +107,11 @@ export default async function Page({
       </section>
       <section id="contact">
         <BlurFade delay={BLUR_FADE_DELAY * 7}>
-          <ContactSection emailUrl={DATA.contact.social.email?.url ?? `mailto:${DATA.contact.email}`} />
+          <ContactSection
+            emailUrl={
+              DATA.contact.social.email?.url ?? `mailto:${DATA.contact.email}`
+            }
+          />
         </BlurFade>
       </section>
     </main>

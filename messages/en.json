@@ -12,7 +12,12 @@
   "contact": {
     "title": "Contact",
     "heading": "Get in Touch",
-    "description": "Want to chat? Just <emailLink>send me an email</emailLink> and I'll respond you asap."
+    "description": "Want to chat? Just <emailLink>send me an email</emailLink> and I'll get back to you asap, or we can hop on a call."
+  },
+  "booking": {
+    "trigger": "Book a call",
+    "title": "Schedule a meeting",
+    "description": "Pick a time that works for you and I'll confirm the appointment."
   },
   "nav": {
     "home": "Home",

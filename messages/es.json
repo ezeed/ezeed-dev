@@ -12,7 +12,12 @@
   "contact": {
     "title": "Contacto",
     "heading": "Ponete en contacto",
-    "description": "Queres hablar? <emailLink>Mandame un email</emailLink> y te respondo pronto."
+    "description": "Queres hablar? <emailLink>Mandame un email</emailLink> y te respondo pronto, o podemos coordinar una reunión."
+  },
+  "booking": {
+    "trigger": "Agendar una llamada",
+    "title": "Programar una reunión",
+    "description": "Elegí un horario que te venga bien y confirmo el espacio."
   },
   "nav": {
     "home": "Inicio",
