@@ -8,7 +8,7 @@ import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 2592000; // 30 days — revalidate on-demand via /api/revalidate
 
 export async function generateMetadata(): Promise<Metadata> {
   const data = await getResumeData();
